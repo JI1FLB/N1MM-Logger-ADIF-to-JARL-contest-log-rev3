@@ -23,6 +23,8 @@ def phase3( call:str , Contest_name:str, QSLyesno, JST_convert_flag, Power_code,
     dt = ""
     t = ""
     dtstr =""
+    Multi_temp = ""
+
 
     #------------------------------------------------------------------------
     #
@@ -39,6 +41,7 @@ def phase3( call:str , Contest_name:str, QSLyesno, JST_convert_flag, Power_code,
     jarl_file = Callsign + ".txt"
     summary_file = Callsign + "_summary.txt"
     HL_file = Callsign + ".csv"
+
 
     #--------------------------------------------------------------------
     #
@@ -94,7 +97,6 @@ def phase3( call:str , Contest_name:str, QSLyesno, JST_convert_flag, Power_code,
     RST_SENT = ""
     RST_RCVD = ""
     APP_N1MM_EXCHANGE1 = ""
-#    Multi = ""
     APP_N1MM_POINTS = ""
     okng = True
     yesno = ""
@@ -103,62 +105,18 @@ def phase3( call:str , Contest_name:str, QSLyesno, JST_convert_flag, Power_code,
     sheet = ""
     line = ""
     FREQ_JARL = ""
-#    Power_code = False
     Power_code_input = ""
     QSL = '"N"'
     QSO_DATE_HL = ""
     TIME_ON_HL = ""
     UTC_JST = ""
-#    Remarks1=""
-#    JST_convert_flag = True
-    #dt = 0
     dtstr = ""
     t=set
+    Multi_temp = Multi
 
     AA_contest=False
 
-    #--------------------------------------------------------------------
-
-
-    a1 = "CALL:"
-    a2 = "QSO_DATE:"
-    a3 = "TIME_ON:"
-    a4 = "SECTION:"
-    a5 = "BAND:"
-    a6 = "STATION_CALLSIGN:"
-    a7 = "FREQ:"
-    a8 = "CONTEST_ID:"
-    a9 = "FREQ_RX:"
-    a10 = "MODE:"
-    a11 = "RST_RCVD:"
-    a12 = "RST_SENT:"
-    a13 = "TX_PWR:"
-    a14 = "OPERATOR:"
-    a15 = "CQZ:"
-    a16 = "STX:"
-    a17 = "APP_N1MM_EXCHANGE1:"
-    a18 = "APP_N1MM_POINTS:"
-    a19 = "APP_N1MM_RADIO_NR:"
-    a20 = "APP_N1MM_CONTINENT:"
-    a21 = "APP_N1MM_CONTACTTYPE:"
-    a22 = "APP_N1MM_RUN1RUN2:"
-    a23 = "APP_N1MM_RADIOINTERFACED:"
-    a24 = "APP_N1MM_ISORIGINAL:"
-    a25 = "APP_N1MM_NETBIOSNAME:"
-    a26 = "APP_N1MM_ISRUNQSO:"
-    a27 = "EOR>"
-    a28 = "AGE"
-    a29 = "COMMENT"
-    a30 = "APP_N1MM_MISCTEXT:"
-    a31 = "SRX"
-
-
-#----------------------------------------------------------------------------
-#    print("\n")
-#    print("*** ログシートの必要事項入力")
-#    print("\n")
-
-
+ 
     #------------------------------------------------------------------------
     #
     #   ハムログ　UTC/JST選択
@@ -286,10 +244,10 @@ def phase3( call:str , Contest_name:str, QSLyesno, JST_convert_flag, Power_code,
             APP_N1MM_MISCTEXT = " "
 
             
-    #--------------------------------------------------
-    #
-    #       JARL LOG作成　　ADIFフォーマットから要素抽出
-    #
+#--------------------------------------------------
+#
+#       JARL LOG作成　　ADIFフォーマットから要素抽出
+#
 
             
         log = log.replace(' "','')
@@ -332,8 +290,7 @@ def phase3( call:str , Contest_name:str, QSLyesno, JST_convert_flag, Power_code,
                     dt = datetime.strptime(dtstr, "%Y%m%d %H%M")
                     dHL = dt
 
-
-                
+ 
                 t=str(dt).split(" ")
                 
                 QSO_DATE_JARL = t[0]
@@ -625,11 +582,11 @@ def phase3( call:str , Contest_name:str, QSLyesno, JST_convert_flag, Power_code,
                     Multi = Multi[0:int(len(Multi))-1]+"L"
                 elif "5.6G" == FREQ_JARL:
                     Multi = Multi[0:int(len(Multi))-1]+"L"
-                elif "10.G" == FREQ_JARL:
+                elif "10.1G" == FREQ_JARL:
                     Multi = Multi[0:int(len(Multi))-1]+"L"
-                else:
-                    Multi = Multi    
-
+                else :
+                    Multi = Multi_temp   
+           
 
 
     #--------------------------------------
@@ -647,6 +604,8 @@ def phase3( call:str , Contest_name:str, QSLyesno, JST_convert_flag, Power_code,
 
     #   ファイル出力　ALL Asia DX contest対応
     
+                
+                
                 if AA_contest == True:
 
                     line = QSO_DATE_JARL+" "+TIME_ON_JARL+" "+FREQ_JARL+" "+MODE+" "+CALL+" "+RST_SENT+" "+Multi+" "+RST_RCVD+" "+ AGE +"\n"

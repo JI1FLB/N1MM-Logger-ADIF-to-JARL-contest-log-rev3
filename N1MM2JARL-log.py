@@ -103,8 +103,8 @@ def log_generate() :
     Guest_op =Guest.get()
     FD = FD_contest.get()
     Mop = Multi_Op.get()
-    form = form_file.get()
-    file_path = folder_path.get()
+#    form = form_file.get()
+#    file_path = folder_path.get()
     
     Ph0_data = phase0(Guest_op, FD, Mop )
 
@@ -114,23 +114,24 @@ def log_generate() :
 
 #    mbox.showinfo('Log Remarks', 'Remark: ' + a )
     
-    #  Phase1を起動
-    #       ADIFファイルのログライン分割を1ラインに修正
+#  Phase1を起動
+#       ADIFファイルのログライン分割を1ラインに修正
     phase1( Callsign )
 
 
-    #  Phase2を起動
-    #     スコアサマリーの生成、JARLサマリーシートへ得点を転記
+#  Phase2を起動
+#     スコアサマリーの生成、JARLサマリーシートへ得点を転記
     phase2( Callsign , FD_coe , Contest_name )
 
-    #Phase3を起動
+# Phase3を起動
+
     Multi = My_multi.get()
     QSL = QSLyesno.get()
     JST_conv = JST_convert_flag.get()
     Power = Power_code.get()
     AA = AA_contest.get()
     
-    phase3( Callsign , Contest_name, QSL, JST_conv, QSL, Multi, AA, Remarks1.get() )
+    phase3( Callsign , Contest_name, QSL, JST_conv, Power, Multi, AA, Remarks1.get() )
 
 
 def form_view() :
